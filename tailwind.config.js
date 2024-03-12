@@ -6,7 +6,8 @@ module.exports = {
       colors:{
         'vermelho-fundo': '#7D2727',
         'gradiente': '#540606',
-        'input': '#4F0000'
+        'input': '#4F0000',
+        'placeholder': '#860000'
       }
     },
   },
