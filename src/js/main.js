@@ -1,4 +1,4 @@
-import { getFilmes,} from "./filmes.js"
+import { getFilmes,postFilme} from "./filmes.js"
 
 // getFilmes()
 
@@ -16,32 +16,47 @@ function criarCard (filme){
 }
 
 async function preencherContainer() {
+
     const container = document.getElementById('cards-filme')
     const filmes = await getFilmes()
-filmes.forEach(filme => {
-    const card = criarCard(filme)
-    container.appendChild(card)
-    
-});
 
+    filmes.forEach(filme => {
+        const card = criarCard(filme)
+        container.appendChild(card)
+    });
 
-    
 }
- preencherContainer()
+
+preencherContainer()
+
+const btnAddFilme = document.getElementById('criar')
+
+async function adicionarFilme(){
+    const nome = document.getElementById('nome').value
+    const sinopse = document.getElementById('sinopse').value
+    const duracao = document.getElementById('duracao').value
+    const data_lancamento = document.getElementById('data_lancamento').value
+    const data_relancamento = document.getElementById('data_relancamento').value
+    const foto_capa = document.getElementById('foto_capa').value
+    const valor_unitario = document.getElementById('valor_unitario').value
+
+    try {
+        const novoFilme = {}
+        novoFilme.nome = nome
+        novoFilme.sinopse = sinopse
+        novoFilme.duracao = duracao
+        novoFilme.data_lancamento = data_lancamento
+        novoFilme.data_relancamento = data_relancamento
+        novoFilme.foto_capa = foto_capa
+        novoFilme.valor_unitario = valor_unitario
+        console.log(novoFilme)
+        await postFilme(novoFilme)
+    } catch (error) {
+        console.log(error)
+    }
+
+}
+
+btnAddFilme.addEventListener('click', adicionarFilme)
 
 
-
-// const filme = 
-// {
-//         "nome": "Testeeeee Leonid",
-//         "sinopse": "Fazendo parte da franquia Invocação do Mal, em A Freira, após uma irmã cometer suicídio em um convento na Romênia,\n o Vaticano envia um padre atormentado e uma noviça para investigar o ocorrido. Arriscando suas vidas, a fé e até suas almas,\n os dois descobrem um segredo profano no local, confrontando-se com uma força do mal que toma a forma de uma freira demoníaca e transforma o convento num campo de batalha espiritual.",
-//         "duracao": "01:37:00",
-//         "data_lancamento": "2018-09-06",
-//         "data_relancamento":"2018-09-06",
-//         "foto_capa": "https://br.web.img3.acsta.net/c_310_420/pictures/18/07/18/21/53/1348208.jpg",
-//         "valor_unitario": 50
-
-
-// }
-
-// await postFilme(filme)
